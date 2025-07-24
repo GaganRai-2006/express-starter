@@ -4,6 +4,7 @@ const connectDB = require('./config/dbconfig');
 const User=require('./schema/userSchema');
 const userrouter = require('./Router/userRouter');
 const cartrouter = require('./Router/cartRouter');
+const authroute = require('./Router/authRoute');
 const app=express();
 
 app.use(express.json());
@@ -11,6 +12,7 @@ app.use(express.urlencoded({extended:true}));
 app.use(express.text());
 app.use('/users',userrouter);
 app.use('/cart',cartrouter);
+app.use('/auth',authroute);
 
 app.post('/ping',(req,res)=>{
     console.log(req.body);
