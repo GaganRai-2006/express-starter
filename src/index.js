@@ -21,12 +21,5 @@ app.listen(serverConfig.PORT,async()=>{
      await connectDB()
     console.log(`server is running at port ${serverConfig.PORT}`);
 
-    // const newUser= await User.create({
-    //     firstName:"gagan",
-    //     lastName:"duncan",
-    //     mobileNumber:"1234567890",
-    //     email:"abc@gmail.com",
-    //     password:"rtae453"
-    // })
-    // console.log("user created",newUser);
+ 
 })
