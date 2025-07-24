@@ -1,8 +1,8 @@
 const User=require('../schema/userSchema');
 
-class UserRepository{
+
     
-    async findUser(parameters){
+    async function findUser(parameters){
         try{
             const response=await User.findOne({...parameters});
             return response;
@@ -10,15 +10,9 @@ class UserRepository{
             throw{reason:"error while fetching the user",statuscode:500};
         }
     }
-    async createUser(userDetails){
+    async function createUser(userDetails){
         try{
-            const user= await User.create({
-                firstName:userDetails.firstName,
-                lastName:userDetails.lastName,
-                email:userDetails.email,
-                mobileNumber:userDetails.mobileNumber,
-                password:userDetails.password            
-            });
+            const user= await User.create({...userDetails});
             return user;
         }catch(err){
             console.log(err);
@@ -27,11 +21,7 @@ class UserRepository{
         }
     }
 
-    
-
-    
-    
-    
-    
+module.exports={
+    findUser,
+    createUser
 }
-module.exports=UserRepository;

@@ -1,20 +1,26 @@
-class UserService{
-    constructor(UserRepository){
-        this.UserRepository=UserRepository;
-    }
-    
 
-   async registerUser(userDetails){
-        const user=await this.UserRepository.findUser({
-            email:userDetails.email,
-            mobileNumber:userDetails.mobileNumber
-        });
+const { findUser,createUser } = require("../repository/userRepository");
+    
+async function registerUser(userDetails){
+    try{
+        const user=await findUser({
+        email:userDetails.email,
+        mobileNumber:userDetails.mobileNumber
+    });
 
         if(user){
             throw{reason:"user with this email or mobile number already exists",statuscode:400};
         }
         
-        const newUser=await this.UserRepository.createUser(userDetails);
+        const newUser=await createUser(
+            {
+                firstName:userDetails.firstName,
+                lastName:userDetails.lastName,
+                email:userDetails.email,
+                mobileNumber:userDetails.mobileNumber,
+                password:userDetails.password            
+            }
+        );
         
            
 
@@ -24,6 +30,10 @@ class UserService{
         return newUser;
 
     }
-}
-
-module.exports=UserService;
+    catch(err){
+        console.log(err);
+        throw({reason:"error while registering the user",statuscode:500});
+    }
+            }
+        
+module.exports=registerUser;
