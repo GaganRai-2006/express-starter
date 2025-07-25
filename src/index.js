@@ -10,6 +10,7 @@ const isLoggedIn = require('./validation/authValidation');
 const uploader = require('./middlewares/multerMiddleware');
 const cloudinary=require('./config/cloudinaryConfig');
 const fs=require('fs/promises');
+const productroute = require('./Router/productRoute');
 const app=express();
 
 app.use(express.json());
@@ -19,6 +20,7 @@ app.use(cookieParser());
 app.use('/users',userrouter);
 app.use('/cart',cartrouter);
 app.use('/auth',authroute);
+app.use('/create',productroute);
 
 app.post('/photo',uploader.single('file1'),async (req,res)=>{
     console.log(req.file);
