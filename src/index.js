@@ -7,6 +7,9 @@ const userrouter = require('./Router/userRouter');
 const cartrouter = require('./Router/cartRouter');
 const authroute = require('./Router/authRoute');
 const isLoggedIn = require('./validation/authValidation');
+const uploader = require('./middlewares/multerMiddleware');
+const cloudinary=require('./config/cloudinaryConfig');
+const fs=require('fs/promises');
 const app=express();
 
 app.use(express.json());
@@ -16,6 +19,16 @@ app.use(cookieParser());
 app.use('/users',userrouter);
 app.use('/cart',cartrouter);
 app.use('/auth',authroute);
+
+app.post('/photo',uploader.single('file1'),async (req,res)=>{
+    console.log(req.file);
+    const result =await cloudinary.uploader.upload(req.file.path);
+    console.log("result from cloudinary",result);
+    await fs.unlink(req.file.path); // delete the file from local storage
+    res.json({
+        message:"ok"
+    })
+})
 
 app.get('/ping',isLoggedIn,(req,res)=>{
     console.log(req.body);
