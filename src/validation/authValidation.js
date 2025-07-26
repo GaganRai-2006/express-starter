@@ -1,7 +1,7 @@
 const jwt=require('jsonwebtoken');
 const {SECRET_KEY}=require('../config/serverconfig');
 
-async function isLoggedIn(req,res,next){
+function isLoggedIn(req,res,next){
     const token=  req.cookies["authToken"];
     if(!token){
         return res.status(401).json({
@@ -24,10 +24,28 @@ async function isLoggedIn(req,res,next){
     }
     req.user={
         email:decoded.email,
-        id:decoded.id
+        id:decoded.id,
+        role:decoded.role
     };
 
     next();
 }
+function isAdmin(req,res,next){
+    if(req.user.role !=="ADMIN"){
+        return res.status(403).json({
+            sucess:"false",
+            message:"you are not authorized to perform this action",
+            data:{},
+            error:{
+                statuscode:403,
+                reason:"Unauthorized"
+            }
+        })
+    }
+    next();
+}
 
-module.exports=isLoggedIn;
+module.exports={
+    isLoggedIn,
+    isAdmin,
+}

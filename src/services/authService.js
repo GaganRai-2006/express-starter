@@ -17,8 +17,9 @@ async function loginUser(userDetails){
     if(!isPasswordvalid){
         throw{message:"given password is not valid.please try again",statuscode:401};
     }
+    const Role=user.role? user.role: "USER";
 
-    const token=jwt.sign({email:user.email,id:user._id},SECRET_KEY,{expiresIn:JWT_EXPIRY});
+    const token=jwt.sign({email:user.email,id:user._id,role:Role},SECRET_KEY,{expiresIn:JWT_EXPIRY});
     return token;
 
 }
