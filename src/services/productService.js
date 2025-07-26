@@ -1,8 +1,13 @@
 const cloudinary=require('../config/cloudinaryConfig');
 const fs=require('fs/promises');
 const { createProduct, getProduct, deleteProduct } = require('../repository/productRepository');
+const BadRequestError = require('../utils/badRequesterror');
 
 async function productservice(product_details,file){
+    if(!file){
+        throw new BadRequestError(['image file is not given']);
+        
+    }
    
     const image=await cloudinary.uploader.upload(file.path);
     const data={
@@ -42,6 +47,7 @@ async function getProductById(id){
 async function deleteProductById(id){
     try{
         const response=await deleteProduct(id);
+        console.log(response);
         if(!response){
             throw{reason:"unable to delete product",statuscode:400};
         }

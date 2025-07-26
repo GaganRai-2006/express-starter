@@ -15,7 +15,7 @@ async function createProduct(productDetails){
 
 async function getProduct(id){
     try{
-        const response=await product.findOne({_id:id});
+        const response=await product.findById({_id:id});
         if(!response){
             throw{reason:"unable to get product",statuscode:404};
         }
@@ -28,7 +28,7 @@ async function getProduct(id){
 
 async function deleteProduct(id){
     try{
-        const response=await product.deleteOne({_id:id});
+        const response=await product.findByIdAndDelete({_id:id});
         if(!response){
             throw{reason:"product not deleted",statuscode:400};
         }

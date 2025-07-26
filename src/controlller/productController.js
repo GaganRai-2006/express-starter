@@ -72,7 +72,7 @@ async function deleteProduct(req,res){
        console.log(err);
        return res.status(err.statuscode).json({
         success:false,
-        message:"Product is not deleted",
+        message:"Product is not exist",
         data:{},
         error:err.reason
        })
