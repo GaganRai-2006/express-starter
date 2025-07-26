@@ -21,6 +21,8 @@ app.use('/users',userrouter);
 app.use('/cart',cartrouter);
 app.use('/auth',authroute);
 app.use('/create',productroute);
+app.use('/products',productroute);
+app.use('/product/delete',productroute);
 
 app.post('/photo',uploader.single('file1'),async (req,res)=>{
     console.log(req.file);
