@@ -7,7 +7,7 @@ const productroute=express.Router();
 
 productroute.post('/product', isLoggedIn, isAdmin, uploader.single('image'),product);
 productroute.get('/:id',getproducts)
-productroute.delete('/:id',deleteProduct);
+productroute.delete('/:id',isLoggedIn,isAdmin,deleteProduct);
 
 
 module.exports=productroute;

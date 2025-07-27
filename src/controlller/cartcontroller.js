@@ -1,12 +1,13 @@
-const Createcart = require("../services/cartService");
+const {getcart} = require("../services/cartService");
 
-async function cart(req,res){
+
+async function fetchcart(req,res){
     try{
-        const cartDetails=req.body;
-        const response=await Createcart(cartDetails);
-        return res.status(201).json({
+        const cartId=req.user.id;
+        const response=await getcart(cartId);
+        return res.status(200).json({
             success:true,
-            message:"successfulle creating the cart",
+            message:"successfully getting the cart",
             data:response,
             error:{}
         })
@@ -20,4 +21,6 @@ async function cart(req,res){
         })
     }
 }
-module.exports=cart;
+module.exports={
+    fetchcart,
+}

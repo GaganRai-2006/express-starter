@@ -1,17 +1,19 @@
-const createCart = require("../repository/cartRepository");
+const {findCart} = require("../repository/cartRepository");
 
-async function Createcart(cartDetails){
+async function getcart(cartDetails){
     try{
-        const response=await createCart(cartDetails);
+        const response=await findCart(cartDetails);
        
         if(!response){
-            throw{reason:"cart is not creatde",statuscode:500};
+            throw{reason:"Not getting the Cart",statuscode:500};
         }
         return response;
     }catch(err){
         console.log(err);
-        throw{reason:"error while creating the cart",statuscode:500};
+        throw{reason:"error while fetching the cart",statuscode:500};
     }
 
 }
-module.exports=Createcart;
+module.exports={
+    getcart,
+}

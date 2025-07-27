@@ -18,7 +18,7 @@ app.use(express.urlencoded({extended:true}));
 app.use(express.text());
 app.use(cookieParser());
 app.use('/users',userrouter);
-app.use('/cart',cartrouter);
+
 app.use('/auth',authroute);
 app.use('/create',productroute);
 app.use('/products',productroute);
