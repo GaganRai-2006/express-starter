@@ -29,7 +29,7 @@ app.use('/user',orderrouter)
 
 
 
-app.get('/ping',isLoggedIn,(req,res)=>{
+app.get('/ping',(req,res)=>{
     console.log(req.body);
     console.log(req.cookies);
     return res.json({message:"pong"});
