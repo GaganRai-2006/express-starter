@@ -11,6 +11,7 @@ const uploader = require('./middlewares/multerMiddleware');
 const cloudinary=require('./config/cloudinaryConfig');
 const fs=require('fs/promises');
 const productroute = require('./Router/productRoute');
+const { orderrouter } = require('./Router/orderRoute');
 const app=express();
 
 app.use(express.json());
@@ -24,6 +25,7 @@ app.use('/create',productroute);
 app.use('/products',productroute);
 app.use('/product/delete',productroute);
 app.use('/user/cart',cartrouter);
+app.use('/user',orderrouter)
 
 
 

@@ -47,7 +47,7 @@ async function clearCart(req,res){
         const response=await ClearCart(userId);
         return res.status(200).json({
             success:true,
-            message:"successfully add the  product to cart",
+            message:"successfully clear the cart",
             data:response,
             error:{}
         })
