@@ -25,7 +25,7 @@ async function createCart(id){
 }
 async function findCart(id){
     try{
-        const response=await Cart.findOne({userId:id});
+        const response=await Cart.findOne({userId:id}).populate('items.product');
         if(!response){
             newCart=await createCart(id);
             return newCart;

@@ -25,6 +25,11 @@ const Productschema=new mongoose.Schema({
 
         }
     },
+    quantity:{
+        type:Number,
+        required:[true,"quantity is required"],
+        default:10,
+    },
     price:{
         type:Number,
         required:[true,"price is required"],

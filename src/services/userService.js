@@ -1,5 +1,5 @@
 
-const createCart = require("../repository/cartRepository");
+const {createCart} = require("../repository/cartRepository");
 const { findUser,createUser } = require("../repository/userRepository");
     
 async function registerUser(userDetails){
@@ -19,7 +19,8 @@ async function registerUser(userDetails){
                 lastName:userDetails.lastName,
                 email:userDetails.email,
                 mobileNumber:userDetails.mobileNumber,
-                password:userDetails.password            
+                password:userDetails.password,
+                role:userDetails.role || "USER",            
             }
         );
         

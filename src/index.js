@@ -23,7 +23,7 @@ app.use('/auth',authroute);
 app.use('/create',productroute);
 app.use('/products',productroute);
 app.use('/product/delete',productroute);
-app.use('/user',cartrouter);
+app.use('/user/cart',cartrouter);
 
 
 
