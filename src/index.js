@@ -14,6 +14,10 @@ const productroute = require('./Router/productRoute');
 const { orderrouter } = require('./Router/orderRoute');
 const app=express();
 
+app.use(cors({
+    origin:'http:localhost:5173',
+    Credential:true,
+}))
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(express.text());
