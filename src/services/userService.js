@@ -15,11 +15,7 @@ async function registerUser(userDetails){
         
         const newUser=await createUser(
             {
-                firstName:userDetails.firstName,
-                lastName:userDetails.lastName,
-                email:userDetails.email,
-                mobileNumber:userDetails.mobileNumber,
-                password:userDetails.password,
+                ...userDetails,
                 role:userDetails.role || "USER",            
             }
         );
