@@ -12,6 +12,7 @@ const cloudinary=require('./config/cloudinaryConfig');
 const fs=require('fs/promises');
 const productroute = require('./Router/productRoute');
 const { orderrouter } = require('./Router/orderRoute');
+const cors=require('cors');
 const app=express();
 
 app.use(cors({
