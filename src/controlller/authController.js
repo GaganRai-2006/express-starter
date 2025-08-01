@@ -6,7 +6,7 @@ async function login(req,res){
     //service
     try{
         const response=await loginUser(payload);
-        res.cookie('authToken',response,{
+        res.cookie('authToken',response.token,{
             httpOnly:true,
             secure:false,
             maxAge:24*60*60*1000 //24 hours
@@ -14,8 +14,11 @@ async function login(req,res){
 
         return res.status(200).json({
             success:true,
-            message:"loggin successfully",
-            data:{},
+            message:"successfully loggedIn",
+            data:{
+                Role:response.Role,
+                userData:response.userData
+            },
             error:{}
         })
     }catch(err){
@@ -29,6 +32,7 @@ async function login(req,res){
     }
 }
 async function logout(req,res){
+    console.log("cookie from frontend",req.cookies);
     res.cookie("authToken","",{
             httpOnly:true,
             secure:false,

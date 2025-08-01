@@ -1,4 +1,4 @@
-const {productservice, getProductById, deleteProductById} = require("../services/productService");
+const {productservice, getProductById, deleteProductById, getProductsdata} = require("../services/productService");
 
 
 async function product(req,res){
@@ -51,6 +51,32 @@ async function getproducts(req,res){
 
 }
 
+async function getproductsAll(req,res){
+    
+    try{
+        
+        
+        
+        const response=await getProductsdata();
+        if(!response){
+            throw{reason:"Not found",statuscode:404};
+        }
+        return res.json({
+            success:true,
+            data:response,
+            error:{}
+        });
+    }catch(err){
+        console.log(err);
+        return res.status(err.statuscode).json({
+            success:false,
+            data:{},
+            error:err.reason
+        })
+    }
+
+}
+
 async function deleteProduct(req,res){
     try{
         const id=req.params.id;
@@ -83,4 +109,5 @@ module.exports={
     product,
     getproducts,
     deleteProduct,
+    getproductsAll
 }

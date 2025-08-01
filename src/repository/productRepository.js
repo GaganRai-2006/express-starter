@@ -25,6 +25,18 @@ async function getProduct(id){
         throw{reason:"product couldn't find",statuscode:404};
     }
 }
+async function getAllProducts(){
+    try{
+        const response=await product.find({});
+        if(!response){
+            throw{reason:"unable to get product",statuscode:404};
+        }
+        return response;
+    }catch(err){
+        console.log(err);
+        throw{reason:"product couldn't find",statuscode:404};
+    }
+}
 
 async function deleteProduct(id){
     try{
@@ -42,5 +54,6 @@ async function deleteProduct(id){
 module.exports={
     createProduct,
     getProduct,
-    deleteProduct
+    deleteProduct,
+    getAllProducts
 }

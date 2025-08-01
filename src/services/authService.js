@@ -20,7 +20,7 @@ async function loginUser(userDetails){
     const Role=user.role? user.role: "USER";
 
     const token=jwt.sign({email:user.email,id:user._id,role:Role},SECRET_KEY,{expiresIn:JWT_EXPIRY});
-    return token;
+    return {token,Role,userData:{email:user.email,firstName:user.firstName}};
 
 }
 module.exports=loginUser;

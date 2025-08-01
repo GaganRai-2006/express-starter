@@ -1,6 +1,6 @@
 const cloudinary=require('../config/cloudinaryConfig');
 const fs=require('fs/promises');
-const { createProduct, getProduct, deleteProduct } = require('../repository/productRepository');
+const { createProduct, getProduct, deleteProduct, getAllProducts } = require('../repository/productRepository');
 const BadRequestError = require('../utils/badRequesterror');
 
 async function productservice(product_details,file){
@@ -44,6 +44,19 @@ async function getProductById(id){
         throw{reson:"unable to find it",statuscode:404};
     }
 }
+
+async function getProductsdata(){
+    try{
+        const response=await getAllProducts();
+        if(!response){
+            throw{reason:"unable to get product",statuscode:404};
+        }
+        return response;
+    }catch(err){
+        console.log(err);
+        throw{reson:"unable to find it",statuscode:404};
+    }
+}
 async function deleteProductById(id){
     try{
         const response=await deleteProduct(id);
@@ -62,4 +75,5 @@ module.exports={
 productservice,
 getProductById,
 deleteProductById,
+getProductsdata
 }

@@ -1,4 +1,5 @@
 const express=require('express');
+const cors=require('cors');
 const cookieParser=require('cookie-parser');
 const serverConfig=require('./config/serverconfig');
 const connectDB = require('./config/dbconfig');
@@ -12,13 +13,13 @@ const cloudinary=require('./config/cloudinaryConfig');
 const fs=require('fs/promises');
 const productroute = require('./Router/productRoute');
 const { orderrouter } = require('./Router/orderRoute');
-const cors=require('cors');
+
 const app=express();
 
 app.use(cors({
-    origin:'http:localhost:5173',
-    Credential:true,
-}))
+  origin: 'http://localhost:5173',
+  credentials: true
+}));
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(express.text());
