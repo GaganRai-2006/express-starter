@@ -17,7 +17,7 @@ const { orderrouter } = require('./Router/orderRoute');
 const app=express();
 
 app.use(cors({
-  origin: 'https://tourmaline-genie-0f4d90.netlify.app/',
+  origin: 'https://tourmaline-genie-0f4d90.netlify.app',
   credentials: true
 }));
 app.use(express.json());
